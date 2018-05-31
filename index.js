@@ -148,8 +148,6 @@ function SonosAccessory(log, config) {
 
   this.service
     .addCharacteristic(Characteristic.Volume)
-    .on('get', this.getVolume.bind(this))
-    .on('set', this.setVolume.bind(this));
   
   this.service
     .addCharacteristic(Characteristic.Mute)
