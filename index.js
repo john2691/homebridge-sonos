@@ -145,14 +145,17 @@ function SonosAccessory(log, config) {
   if (!this.room) throw new Error("You must provide a config value for 'room'.");
 
   this.service = new Service.Speaker(this.name);
-  Service.Speaker.UUID = '00000113-0000-1000-8000-0026BB765291';
+
+  this.service
+    .getCharacteristic(Characteristic.On)
+    .on('get', this.getOn.bind(this))
+    .on('set', this.setOn.bind(this));
 
   this.service
     .addCharacteristic(Characteristic.Volume)
+    .on('get', this.getVolume.bind(this))
+    .on('set', this.setVolume.bind(this));
   
-  //this.service
-    //.addCharacteristic(Characteristic.Mute)
-
   this.search();
 }
 
